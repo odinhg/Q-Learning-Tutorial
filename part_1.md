@@ -83,7 +83,7 @@ Bruk følgende fyllfarger for de forskjellige rutetypene (og ruten agenten befin
 - Målrute: Blå.
 - Agentens rute: Oransje.
 
-&#128203; **Test implementasjonen din:** For å teste funksjonen `draw_maze` som du har laget, lagre filen [`test_draw_maze.py`](./test_draw_maze.py) i samme mappe som de andre filene. Når du kjører `test_draw_maze.py` skal du få opp et vindu som ser slik ut:
+&#128203; **Test implementasjonen din:** For å teste funksjonen `draw_maze` som du har laget, lagre filen [`test_draw_maze.py`](./tests/test_draw_maze.py) i samme mappe som de andre filene. Når du kjører `test_draw_maze.py` skal du få opp et vindu som ser slik ut:
 
 ![Eksempel test av funksjonen draw_maze.](./img/test_draw_maze.png)
 

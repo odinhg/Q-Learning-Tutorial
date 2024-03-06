@@ -123,7 +123,7 @@ for pos in product(range(6), range(4)):
 </details>
 
 
-&#128203; **Test implementasjonen din:** Lagre filen [`test_generate_q_table.py`](./test_generate_q_table.py) i samme mappe som de andre filene og kjør den for å teste koden din. Hvis du får `All test passed!` kan du gå videre.
+&#128203; **Test implementasjonen din:** Lagre filen [`test_generate_q_table.py`](./tests/test_generate_q_table.py) i samme mappe som de andre filene og kjør den for å teste koden din. Hvis du får `All test passed!` kan du gå videre.
 
 **2)** I funksjonen `app_started` i filen `main.py`, lag en variabel `app.q_table = generate_q_table(app.maze)` (etter at `app.maze` er definert).
 
@@ -151,7 +151,7 @@ Hvis agenten går fra `agent_pos` til en åpen rute skal funksjonen returnere `-
 
 </details>
 
-&#128203; **Test implementasjonen din:** Lagre filen [`test_reward_function.py`](./test_reward_function.py) i samme mappe som de andre filene og kjør den for å teste koden din. Hvis du får `All test passed!` kan du gå videre.
+&#128203; **Test implementasjonen din:** Lagre filen [`test_reward_function.py`](./tests/test_reward_function.py) i samme mappe som de andre filene og kjør den for å teste koden din. Hvis du får `All test passed!` kan du gå videre.
 
 ---
 
@@ -183,7 +183,7 @@ print(max_key)
 
 </details>
 
-&#128203; **Test implementasjonen din:** Lagre filen [`test_get_policy_direction.py`](./test_get_policy_direction.py) i samme mappe som de andre filene og kjør den for å teste koden din. Hvis du får `All test passed!` kan du gå videre.
+&#128203; **Test implementasjonen din:** Lagre filen [`test_get_policy_direction.py`](./tests/test_get_policy_direction.py) i samme mappe som de andre filene og kjør den for å teste koden din. Hvis du får `All test passed!` kan du gå videre.
 
 ---
 
@@ -293,7 +293,7 @@ Lag en funksjon `get_optimal_future_q_value(q_table, agent_pos, direction)` i `l
 
 </details>
 
-&#128203; **Test implementasjonen din:** Lagre filen [`test_get_optimal_future_q_value.py`](./test_get_optimal_future_q_value.py) i samme mappe som de andre filene og kjør den for å teste koden din. Hvis du får `All test passed!` kan du gå videre.
+&#128203; **Test implementasjonen din:** Lagre filen [`test_get_optimal_future_q_value.py`](./tests/test_get_optimal_future_q_value.py) i samme mappe som de andre filene og kjør den for å teste koden din. Hvis du får `All test passed!` kan du gå videre.
 
 ---
 
