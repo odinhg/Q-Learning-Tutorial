@@ -22,6 +22,24 @@
 \usepackage{svg}
 \usepackage{xcolor,colortbl}
 
+
+% Redefine `\rowcolor` to allow a beamer overlay specifier
+% New syntax: \rewcolor<overlay>[color model]{color}[left overhang][right overhang]
+\makeatletter
+% Open `\noalign` and check for overlay specification:
+\def\rowcolor{\noalign{\ifnum0=`}\fi\bmr@rowcolor}
+\newcommand<>{\bmr@rowcolor}{%
+	\alt#1%
+	{\global\let\CT@do@color\CT@@do@color\@ifnextchar[\CT@rowa\CT@rowb}% Rest of original `\rowcolor`
+	{\ifnum0=`{\fi}\@gooble@rowcolor}% End `\noalign` and gobble all arguments of `\rowcolor`.
+}
+% Gobble all normal arguments of `\rowcolor`:
+\newcommand{\@gooble@rowcolor}[2][]{\@gooble@rowcolor@}
+\newcommand{\@gooble@rowcolor@}[1][]{\@gooble@rowcolor@@}
+\newcommand{\@gooble@rowcolor@@}[1][]{\ignorespaces}
+\makeatother
+
+
 \author{Odin Hoff Gardå}
 \title{Q-læring}
 \subtitle{INF100}
@@ -144,17 +162,12 @@
 	\end{column}
 	\begin{column}{0.7\textwidth}%%<--- here
 	\begin{itemize}
-		\item\textbf{Q:} Hva er $R((1,0), \text{høyre})$?
-		\pause
-		\item\textbf{A:} $1.0$
-		\pause
-		\item\textbf{Q:} Hva er $R((1,1), \text{venstre})$?
-		\pause
-		\item\textbf{A:} $-1.0$
-		\pause
-		\item\textbf{Q:} Hva er $R((1,1), \text{opp})$?
-		\pause
-		\item\textbf{A:} $-0.1$
+		\item<1-> \textcolor<3->{gray}{\textbf{Q:} Hva er $R((1,0), \text{høyre})$?}
+		\item<2-> \textcolor<3->{gray}{\textbf{A:} $R((1,0), \text{høyre}) = 1.0$}
+		\item<3-> \textcolor<5->{gray}{\textbf{Q:} Hva er $R((1,1), \text{venstre})$?}
+		\item<4-> \textcolor<5->{gray}{\textbf{A:} $R((1,1), \text{venstre}) = -1.0$}
+		\item<5->\textbf{Q:} Hva er $R((1,1), \text{opp})$?
+		\item<6->\textbf{A:} $R((1,1), \text{opp}) = -0.1$
 	\end{itemize}
 	\end{column}
 	\end{columns}
@@ -169,16 +182,16 @@
 	\def\arraystretch{1.1}
 	\setlength\tabcolsep{0.01\textwidth}
 	\begin{tabular}{|c|c|c|c|c|}\hline
-			\diagbox{$\textbf{s}$}{$\textbf{a}$} & $\textbf{venstre}$ & $\textbf{høyre}$ & $\textbf{opp}$ & $\textbf{ned}$\\ \hline
-			$(0,0)$ & 1.0 & -0.5 & 0.1 & -0.3 \\ \hline
+			\diagbox{$\textbf{s}$}{$\textbf{a}$} & $\textbf{venstre}$ & \only<1-2>{\cellcolor{orange!25}} $\textbf{høyre}$ & $\textbf{opp}$ & \only<3-4>{\cellcolor{orange!25}} $\textbf{ned}$\\ \hline
+			\only<1-2>{\cellcolor{orange!25}}$(0,0)$ & 1.0 & \only<2>{\cellcolor{orange!75}}-0.5 & 0.1 & -0.3 \\ \hline
 			$(1,0)$ & 0.2 & -0.3 & -1.0 & 0.6 \\ \hline
 			$(2,0)$ & -0.4 & -0.1 & 0.3 & 0.7 \\ \hline
 			$(0,1)$ & 0.4 & -0.9 & 1.0 & 0.2 \\ \hline
-		 	$(1,1)$ & 0.6 & -0.1 & 0.4 & 0.8 \\ \hline
+		 	\only<3-4>{\cellcolor{orange!25}}$(1,1)$ & 0.6 & -0.1 & 0.4 & \only<4>{\cellcolor{orange!75}}0.8 \\ \hline
 			$(2,1)$ & 1.0 & 0.5 & 0.8 & -0.5 \\ \hline
 			$(0,2)$ & -0.2 & 0.5 & -0.3 & -0.7 \\ \hline
-			$(1,2)$ & 0.7 & -1.0 & 0.1 & -0.5 \\ \hline
-			$(2,2)$ & 0.1 & 0.0 & 0.8 & 0.1 \\ \hline
+			\rowcolor<5-6>{orange!25}$(1,2)$ & \only<6>{\cellcolor{orange!75}}0.7 & -1.0 & 0.1 & -0.5 \\ \hline
+			\rowcolor<7-8>{orange!25}$(2,2)$ & 0.1 & 0.0 & \only<8>{\cellcolor{orange!75}}0.8 & 0.1 \\ \hline
 	\end{tabular}
 	\end{table}
 	\end{column}
@@ -187,21 +200,14 @@
 	\textbf{Spørsmål:}
 	
 	\begin{itemize}
-	\item\textbf{Q:} Hva er $Q((0,0), \text{høyre})$?
-	\pause
-	\item\textbf{A:} $-0.5$
-	\pause
-	\item\textbf{Q:} Hva er $Q((1,1), \text{ned})$?
-	\pause
-	\item\textbf{A:} $0.8$
-	\pause
-	\item\textbf{Q:} Hva er $\max_{a\in\mathcal{A}}Q(s,a)$ når $s=(1,2)$?
-	\pause
-	\item\textbf{A:} $0.7$
-	\pause
-	\item\textbf{Q:} Hva er $\max_{a\in\mathcal{A}}Q(s,a)$ når $s=(2,2)$?
-	\pause
-	\item\textbf{A:} $0.8$
+	\item<1->\textcolor<3->{gray}{\textbf{Q:} Hva er $Q((0,0), \text{høyre})$?}
+	\item<2->\textcolor<3->{gray}{\textbf{A:} $-0.5$}
+	\item<3->\textcolor<5->{gray}{\textbf{Q:} Hva er $Q((1,1), \text{ned})$?}
+	\item<4->\textcolor<5->{gray}{\textbf{A:} $0.8$}
+	\item<5->\textcolor<7->{gray}{\textbf{Q:} Hva er $\max_{a\in\mathcal{A}}Q(s,a)$ når $s=(1,2)$?}
+	\item<6->\textcolor<7->{gray}{\textbf{A:} $0.7$}
+	\item<7->\textbf{Q:} Hva er $\max_{a\in\mathcal{A}}Q(s,a)$ når $s=(2,2)$?
+	\item<8->\textbf{A:} $0.8$
 	\end{itemize}
 	\end{column}
 	\end{columns}
@@ -216,14 +222,14 @@
 				\def\arraystretch{1.1}
 				\setlength\tabcolsep{0.01\textwidth}
 				\begin{tabular}{|c|c|c|c|c|}\hline
-					\diagbox{$\textbf{s}$}{$\textbf{a}$} & $\textbf{venstre}$ & $\textbf{høyre}$ & $\textbf{opp}$ & $\textbf{ned}$\\ \hline
+					\diagbox{$\textbf{s}$}{$\textbf{a}$} & \only<4>{\cellcolor{orange!75}} $\textbf{venstre}$ & \only<6>{\cellcolor{orange!75}} $\textbf{høyre}$ & \only<2>{\cellcolor{orange!75}} $\textbf{opp}$ & $\textbf{ned}$\\ \hline
 					$(0,0)$ & 1.0 & -0.5 & 0.1 & -0.3 \\ \hline
 					$(1,0)$ & 0.2 & -0.3 & -1.0 & 0.6 \\ \hline
 					$(2,0)$ & -0.4 & -0.1 & 0.3 & 0.7 \\ \hline
-					$(0,1)$ & 0.4 & -0.9 & 1.0 & 0.2 \\ \hline
+					\rowcolor<1-2>{orange!35}$(0,1)$ & 0.4 & -0.9 & \only<2>{\cellcolor{orange!75}}1.0 & 0.2 \\ \hline
 					$(1,1)$ & 0.6 & -0.1 & 0.4 & 0.8 \\ \hline
-					$(2,1)$ & 1.0 & 0.5 & 0.8 & -0.5 \\ \hline
-					$(0,2)$ & -0.2 & 0.5 & -0.3 & -0.7 \\ \hline
+					\rowcolor<3-4>{orange!35}$(2,1)$ & \only<4>{\cellcolor{orange!75}}1.0 & 0.5 & 0.8 & -0.5 \\ \hline
+					\rowcolor<5-6>{orange!35}$(0,2)$ & -0.2 & \only<6>{\cellcolor{orange!75}}0.5 & -0.3 & -0.7 \\ \hline
 					$(1,2)$ & 0.7 & -1.0 & 0.1 & -0.5 \\ \hline
 					$(2,2)$ & 0.1 & 0.0 & 0.8 & 0.1 \\ \hline
 				\end{tabular}
@@ -234,21 +240,14 @@
 			\textbf{Spørsmål:}
 					
 			\begin{itemize}
-			\item\textbf{Q:} Hva er $\pi^*((0,1))$?
-			\pause
-			\item\textbf{A:} $\text{opp}$
-			\pause
-			\item\textbf{Q:} Hva er $\pi^*((2,1))$?
-			\pause
-			\item\textbf{A:} $\text{venstre}$
-			\pause
-			\item\textbf{Q:} Hva er $\pi^*((0,2))$?
-			\pause
-			\item\textbf{A:} $\text{høyre}$
-			\pause
-			\item\textbf{Q:} Hva er $\pi^*((1,1))$?
-			\pause
-			\item\textbf{A:} $\text{ned}$
+			\item<1->\textcolor<3->{gray}{\textbf{Q:} Hva er $\pi^*((0,1))$?}
+			\item<2->\textcolor<3->{gray}{\textbf{A:} $\text{opp}$}
+			\item<3->\textcolor<5->{gray}{\textbf{Q:} Hva er $\pi^*((2,1))$?}
+			\item<4->\textcolor<5->{gray}{\textbf{A:} $\text{venstre}$}
+			\item<5->\textbf{Q:} Hva er $\pi^*((0,2))$?
+			\item<6->\textbf{A:} $\text{høyre}$
+			%\item\textbf{Q:} Hva er $\pi^*((1,1))$?
+			%\item\textbf{A:} $\text{ned}$
 			\end{itemize}	
 		\end{column}
 	\end{columns}
