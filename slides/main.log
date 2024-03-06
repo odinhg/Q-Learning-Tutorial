@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.1.17)  28 FEB 2024 20:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.1.17)  6 MAR 2024 15:58
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -3344,9 +3344,9 @@ ght_svg-tex.pdf): PDF inclusion: multiple pdfs with page group included in a si
 ngle page
 >]
 LaTeX Font Info:    Font shape `OML/neohellenic/m/n' will be
-(Font)              scaled to size 17.64008pt on input line 471.
+(Font)              scaled to size 17.64008pt on input line 470.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <14.4> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 471.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 470.
 
 Overfull \hbox (1.27199pt too wide) has occurred while \output is active
 [][][] 
@@ -3388,7 +3388,7 @@ pe1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/urw/b
 ookman/ubkl8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></
 usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist
 /fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on main.pdf (43 pages, 285976 bytes).
+Output written on main.pdf (43 pages, 286097 bytes).
 PDF statistics:
  445 PDF objects out of 1000 (max. 8388607)
  318 compressed objects within 4 object streams
