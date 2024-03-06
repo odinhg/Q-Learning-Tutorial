@@ -18,7 +18,7 @@ Agenten mottar tilbakemelding på sine handlinger via en belønningsfunksjon. Fo
 
 ## Før du starter 
 
-1. Installer grafikkbiblioteket `uib_inf100_graphics` hvis du ikke allerede har det installert. 
+1. Installer grafikkbiblioteket `uib_inf100_graphics` hvis du ikke allerede har det installert. [Trykk her](https://github.com/torsteins/uib_inf100_graphics?tab=readme-ov-file#installation) for instruksjoner.
 2. I en ny mappe, lag tre tomme Python-filer: `main.py`, `learning.py` og `maze.py`.
 
 Filen `main.py` vil inneholde selve programmet, `learning.py` vil inneholde funksjoner relatert til Q-læring og `maze.py` vil inneholde funksjoner relatert til selve labyrinten (miljøet).
