@@ -41,6 +41,7 @@ Her er en liste over forslag til mulige forbedringer og eksperimenter du kan vel
 
 - Prøv forskjellige verdier av læringsparametrene $\alpha$, $\gamma$ og $\epsilon$.
 - Automatisk resett agenten dersom den bruker for mange steg uten å nå mål.
+- La agenten kunne gå diagonalt.
 - Legg til flere målruter i labyrinten.
 - Lag fin grafikk!
 - Lag en labyrintgenerator som automatisk lager en løsbar labyrint...
@@ -48,6 +49,10 @@ Her er en liste over forslag til mulige forbedringer og eksperimenter du kan vel
 - Lag nye rutetyper. For eksempel, lag en bomberute som gir stor negativ belønning.
 - Tegn en pil i de åpne rutene som peker i den retningen som har størst Q-verdi (se hvordan pilene endrer seg under trening).
 - Utforsk dyp Q-læring (Deep Q-learning) hvor vi erstatter Q-tabellen med et nevralt nettverk.
+
+**Eksempel/inspirasjon:**
+
+![Animert eksempel som viser en forbedret versjon.](./img/improved_example_animated.gif)
 
 ---
 
