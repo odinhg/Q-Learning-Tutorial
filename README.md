@@ -48,7 +48,7 @@ Her er en liste over forslag til mulige forbedringer og eksperimenter du kan vel
 - ...eller lag et eget program for å tegne labyrinter.
 - Lag nye rutetyper. For eksempel, lag en bomberute som gir stor negativ belønning.
 - Tegn en pil i de åpne rutene som peker i den retningen som har størst Q-verdi (se hvordan pilene endrer seg under trening).
-- Utforsk dyp Q-læring (Deep Q-learning) hvor vi erstatter Q-tabellen med et nevralt nettverk. Se for eksempel [her (link)](https://huggingface.co/learn/deep-rl-course/unit3/introduction).
+- Utforsk dyp Q-læring (Deep Q-learning) hvor vi erstatter Q-tabellen med et nevralt nettverk. Se for eksempel [her (link)](https://www.youtube.com/watch?v=AhyznRSDjw8) og [her (link)](https://huggingface.co/learn/deep-rl-course/unit3/introduction).
 
 **Eksempel/inspirasjon:**
 
