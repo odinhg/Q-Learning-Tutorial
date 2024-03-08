@@ -125,7 +125,7 @@ for pos in product(range(6), range(4)):
 
 &#128203; **Test implementasjonen din:** Lagre filen [`test_generate_q_table.py`](./tests/test_generate_q_table.py) i samme mappe som de andre filene og kjør den for å teste koden din. Hvis du får `All test passed!` kan du gå videre.
 
-**2)** I funksjonen `app_started` i filen `main.py`, lag en variabel `app.q_table = generate_q_table(app.maze)` (etter at `app.maze` er definert).
+**2)** I funksjonen `app_started` i filen `main.py`, lag en variabel `app.q_table = generate_q_table(n_row, n_col)` (etter at `app.maze` er definert) hvor `n_row = len(app.maze)` og `n_col = len(app.maze[0])`.
 
 ---
 
@@ -147,7 +147,7 @@ Hvis agenten går fra `agent_pos` til en åpen rute skal funksjonen returnere `-
   <summary><b>&#128161; Hint</b></summary>
 
 - Bruk funksjonen `move_agent` fra filen `maze.py` for å finne agentens nye posisjon etter å ha gått i retning `direction`.
-- Returner belønningsverdi basert på verdien av `maze` for den nye posisjonen. 
+- Returner belønningsverdi basert på verdien av `maze` for den nye posisjonen. Her kan du bruke `is_wall` og `is_goal` fra `maze.py`. 
 
 </details>
 
@@ -305,7 +305,7 @@ Vi skal nå lage varialer for læringsraten $\alpha$ og rabattfaktoren $\gamma$.
 
 **2.d.3) Oppdater Q-verdi**
 
-Vi skal nå oppdatere Q-verdien når agenten går et steg. I funksjonen `timer_fired` i `main.py` under linjen `direction = decide_direction(...)`, oppdater Q-tabellen ved å bruke regelen under.
+Vi skal nå oppdatere Q-verdien når agenten går et steg. I funksjonen `timer_fired` i `main.py` rett under linjen `direction = decide_direction(...)`, oppdater Q-tabellen ved å bruke regelen under.
 
 $$
 Q(s_t, a_t)\leftarrow(1-\alpha)Q(s_t, a_t)+\alpha\left(R(s_t, a_t)+\gamma\max_{a\in\mathcal{A}} Q(s_{t+1}, a)\right)
@@ -314,7 +314,7 @@ $$
 <details>
   <summary><b>&#128161; Hint</b></summary>
 
-- Verdien $Q(s_t, a_t)$ kan du lese fra `app.qtable[app.agent_pos][direction]`.
+- Verdien $Q(s_t, a_t)$ kan du lese fra `app.q_table[app.agent_pos][direction]`.
 - Verdien $R(s_t, a_t)$ kan du finne ved å bruke funksjonen `reward_function` fra `learning.py`.
 - Verdien $\max_{a\in\mathcal{A}} Q(s_{t+1}, a)$ kan du finne ved å bruke funksjonen `get_optimal_future_q_value` fra `learning.py`.
 - Husk at $\alpha$ er lagret i `app.learning_rate` og $\gamma$ eller lagret i `app.discount_factor`.
