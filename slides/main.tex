@@ -253,25 +253,6 @@
 	\end{columns}
 \end{frame}
 
-
-\begin{frame}{Eksempel: $\epsilon$-grådig Q-læring}
-	La $\epsilon$ være et tall mellom $0$ og $1$. Med $\epsilon$-grådig læring velger agenten å utføre
-	
-	\vspace{1em}
-	
-	\begin{enumerate}
-	\setlength\itemsep{2em}
-	\item en tilfeldig handling med sannsynlighet $\epsilon$, og
-	\item handlingen $\pi^*(s)$ med sannsynlighet $1-\epsilon$.
-	\end{enumerate}
-
-	\vspace{1em}
-	
-	
-	Vi reduserer vanligvis verdien av $\epsilon$ gjennom læringen slik at agenten utforsker mest i starten men gradvis baserer valgene på lært kunnskap.
-
-\end{frame}
-
 \hidelogo
 \begin{frame}{Hvordan lære Q-funksjonen?}
 	Vi starter med $Q(s,a)=0$ for alle par $(s,a)\in\mathcal{S}\times\mathcal{A}$. (En Q-tabell hvor alle verdiene er $0$.)
@@ -292,7 +273,7 @@
 	\textbf{Q-læringsalgoritmen (én episode):}
 	
 	\begin{enumerate}
-		\item Agenten er i posisjon $s_t$ ved tid $t$. Vi bruker den $\epsilon$-grådige strategien for å velge en handling $a_t$. Ved å utføre $a_t$ i $s_t$ treffer vi $s_{t+1}$.
+		\item Agenten er i posisjon $s_t$ ved tid $t$. Velg en handling $a_t$. Ved å utføre $a_t$ i $s_t$ treffer vi $s_{t+1}$.
 		
 		\pause
 		
@@ -310,19 +291,39 @@
 
 \begin{frame}{Oppdatering av Q-funksjonen}
 	$$
-	Q(s_t, a_t)\leftarrow(1-\alpha)\underbracket{Q(s_t, a_t)}_{\text{nåværende Q-verdi}}+\alpha\left(\overbracket{R(s_t, a_t)}^{\text{Belønning}}+\gamma\underbracket{\max_{a\in\mathcal{A}} Q(s_{t+1}, a)}_{\substack{\text{estimert beste}\\ \text{fremtidige Q-verdi}}}\right).
+	(1-\alpha)\underbracket{Q(s_t, a_t)}_{\text{nåværende Q-verdi}}+\,\alpha\left(\overbracket{R(s_t, a_t)}^{\substack{\text{Umiddelbar}\\\text{ belønning}}}+\gamma\underbracket{\max_{a\in\mathcal{A}} Q(s_{t+1}, a)}_{\substack{\text{estimert høyeste}\\ \text{fremtidig belønning}}}\right).
 	$$
 	\begin{itemize}
 		\setlength\itemsep{2em}
-		\item Gammel og ny kunnskap kombineres ($\alpha$ bestemmer hvor mye av hver).
+		\item Gammel og ny kunnskap kombineres ($\alpha$ bestemmer balansen mellom de).
 		\item Belønningen for å utføre $a_t$ i tilstand $s_t$ påvirker den nye Q-verdien.
 		\item Hvor mye vi bryr oss om fremtiden bestemmes av $\gamma$.
 		%\item Summanden $\gamma\max_{a\in\mathcal{A}} Q(s_{t+1}, a)$ tillater flyt av informasjon mellom forskjellige tilstander.
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{$\epsilon$-grådig Q-læring: Hvordan velge $a_t$?}
+	\vspace{1em}
+	La $\epsilon$ være et tall mellom $0$ og $1$. I tilstand $s_t$, velg $a_t$ på følgende måte:
+	
+	\vspace{1em}
+	
+	\begin{enumerate}
+		\setlength\itemsep{2em}
+		\item Med sannsynlighet $\epsilon$, velg $a_t$ tilfeldig.
+		\item Med sannsynlighet $1-\epsilon$, velg $a_t=\pi^*(s_t)=\arg\max_{a\in\mathcal{A}}Q(s,a)$.
+	\end{enumerate}
+	
+	\vspace{1em}
+	
+	
+	Vi reduserer vanligvis verdien av $\epsilon$ gjennom læringen slik at agenten utforsker mest i starten men gradvis baserer valgene på lært kunnskap.
+	
+\end{frame}
+
+
 \begin{frame}{Eksempel: Læringsteg 1}
-	La $\alpha=0.8$, $\gamma=0.5$. Anta at $s_t=(1,2)$ og at agenten utfører $a_t=\text{opp}$.
+	Sett $\alpha=0.8$ og $\gamma=0.5$. La $s_t=(1,2)$ og $a_t=\text{opp}$.
 	\vspace{-1em}
 	\begin{columns}
 	\begin{column}{0.4\textwidth}
@@ -353,7 +354,7 @@
 \end{frame}
 
 \begin{frame}{Eksempel: Læringsteg 2}
-	Nå er $s_t=(1,1)$. Anta at agenten tilfeldig velger $a_t=\text{venstre}$.
+	Nå er $s_t=(1,1)$. La $a_t=\text{venstre}$.
 	\vspace{-1em}
 	\begin{columns}
 		\begin{column}{0.4\textwidth}
@@ -384,7 +385,7 @@
 \end{frame}
 
 \begin{frame}{Eksempel: Læringsteg 3}
-	Nå er $s_t=(1,1)$. Anta at agenten velger $a_t:=\pi^*(s_t)=\text{opp}$.
+	Nå er $s_t=(1,1)$. La $a_t:=\pi^*(s_t)=\text{opp}$.
 	\vspace{-1em}
 	\begin{columns}
 		\begin{column}{0.4\textwidth}
@@ -415,7 +416,7 @@
 \end{frame}
 
 \begin{frame}{Eksempel: Læringsteg 4}
-	Nå er $s_t=(1,0)$. Anta at agenten velger $a_t:=\pi^*(s_t)=\text{høyre}$.
+	Nå er $s_t=(1,0)$. La $a_t:=\pi^*(s_t)=\text{høyre}$.
 	\vspace{-1em}
 	\begin{columns}
 		\begin{column}{0.4\textwidth}
@@ -455,7 +456,7 @@ Nå er det din tur til å implementere Q-læring!
 
 \begin{itemize}
 	\setlength\itemsep{1.1em}
-	\item Gå til {\large\url{https://github.com/odinhg/Q-Learning-Tutorial}} (eller skann QR-koden)
+	\item Gå til {\large\url{https://github.com/odinhg/Q-Learning-Tutorial}} (eller skann QR-koden).
 		
 	\begin{center}
 		\includesvg[width=0.25\textwidth]{figs/qr-code.svg}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.3.7)  8 MAR 2024 22:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.3.7)  10 MAR 2024 12:47
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -3133,11 +3133,6 @@ Overfull \hbox (1.27199pt too wide) has occurred while \output is active
 [29
 
 ]
-File: UiB-images/UiB-emblem.pdf Graphic file (type pdf)
-<use UiB-images/UiB-emblem.pdf>
-Package pdftex.def Info: UiB-images/UiB-emblem.pdf  used on input line 273.
-(pdftex.def)             Requested size: 35.12129pt x 27.31631pt.
-
 Overfull \hbox (1.27199pt too wide) has occurred while \output is active
 [][][] 
  []
@@ -3188,7 +3183,7 @@ Overfull \hbox (1.27199pt too wide) has occurred while \output is active
 
 ]
 Package svg Info: Last page of `./svg-inkscape/maze_1_with_coords_go_up_svg-tex
-.pdf' is 2 on input line 353.
+.pdf' is 2 on input line 354.
  (./svg-inkscape/maze_1_with_coords_go_up_svg-tex.pdf_tex
 <./svg-inkscape/maze_1_with_coords_go_up_svg-tex.pdf, id=295, page=1, 43.41823p
 t x 42.52103pt>
@@ -3221,7 +3216,7 @@ _svg-tex.pdf): PDF inclusion: multiple pdfs with page group included in a singl
 e page
 >]
 Package svg Info: Last page of `./svg-inkscape/maze_2_with_coords_go_left_svg-t
-ex.pdf' is 2 on input line 384.
+ex.pdf' is 2 on input line 385.
  (./svg-inkscape/maze_2_with_coords_go_left_svg-tex.pdf_tex
 <./svg-inkscape/maze_2_with_coords_go_left_svg-tex.pdf, id=309, page=1, 43.4182
 3pt x 42.52103pt>
@@ -3254,7 +3249,7 @@ ft_svg-tex.pdf): PDF inclusion: multiple pdfs with page group included in a sin
 gle page
 >]
 Package svg Info: Last page of `./svg-inkscape/maze_2_with_coords_go_up_svg-tex
-.pdf' is 2 on input line 415.
+.pdf' is 2 on input line 416.
  (./svg-inkscape/maze_2_with_coords_go_up_svg-tex.pdf_tex
 <./svg-inkscape/maze_2_with_coords_go_up_svg-tex.pdf, id=320, page=1, 43.41823p
 t x 42.52103pt>
@@ -3287,7 +3282,7 @@ _svg-tex.pdf): PDF inclusion: multiple pdfs with page group included in a singl
 e page
 >]
 Package svg Info: Last page of `./svg-inkscape/maze_3_with_coords_go_right_svg-
-tex.pdf' is 2 on input line 446.
+tex.pdf' is 2 on input line 447.
  (./svg-inkscape/maze_3_with_coords_go_right_svg-tex.pdf_tex
 <./svg-inkscape/maze_3_with_coords_go_right_svg-tex.pdf, id=331, page=1, 43.418
 23pt x 42.52103pt>
@@ -3320,7 +3315,7 @@ ght_svg-tex.pdf): PDF inclusion: multiple pdfs with page group included in a si
 ngle page
 >]
 Package svg Info: Last page of `./svg-inkscape/qr-code_svg-tex.pdf' is 1 on inp
-ut line 471.
+ut line 472.
  (./svg-inkscape/qr-code_svg-tex.pdf_tex
 <./svg-inkscape/qr-code_svg-tex.pdf, id=343, page=1, 807.7678pt x 807.7678pt>
 File: ./svg-inkscape/qr-code_svg-tex.pdf Graphic file (type pdf)
@@ -3350,11 +3345,11 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 33391 strings out of 477312
- 658536 string characters out of 5822576
+ 33399 strings out of 477312
+ 658605 string characters out of 5822576
  1874388 words of memory out of 5000000
  52550 multiletter control sequences out of 15000+600000
- 604974 words of font info for 235 fonts, out of 8000000 for 9000
+ 607723 words of font info for 239 fonts, out of 8000000 for 9000
  395 hyphenation exceptions out of 8191
  128i,24n,122p,1001b,923s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/gfsneohellenic/GFSNeohellenic-Itali
@@ -3369,10 +3364,10 @@ pe1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/urw/b
 ookman/ubkl8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></
 usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist
 /fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on main.pdf (41 pages, 284455 bytes).
+Output written on main.pdf (41 pages, 284043 bytes).
 PDF statistics:
  435 PDF objects out of 1000 (max. 8388607)
  308 compressed objects within 4 object streams
  83 named destinations out of 1000 (max. 500000)
- 86811 words of extra memory for PDF output out of 89155 (max. 10000000)
+ 90907 words of extra memory for PDF output out of 106986 (max. 10000000)
 
