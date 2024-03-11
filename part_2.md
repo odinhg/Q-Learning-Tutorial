@@ -165,7 +165,7 @@ På denne måten lar vi agenten utforske tilfeldige retninger slik at den kan l�
 
 **2.c.1) Finn optimal retning basert på Q-tabellen** 
 
-Lag en funksjon `get_policy_direction(agent_pos, q_table)` i filen `learning.py`. Denne funksjonen tar inn to parametere: en tupel av heltall `agent_pos` som angir agentens posisjon og `q_table` som representerer en Q-tabell. Funksjonen skal returnere en streng (`"left"`, `"right"`, `"up"` eller `"down"`) som angir retningen (handlingen) som korresponderer til høyest Q-verdi i angitt posisjon (tilstand).
+Lag en funksjon `get_policy_direction(agent_pos, q_table)` i filen `learning.py`. Denne funksjonen tar inn to parametere: en tupel av heltall `agent_pos` som angir agentens posisjon og `q_table` som representerer en Q-tabell. Funksjonen skal returnere en streng (`"left"`, `"right"`, `"up"` eller `"down"`) som angir retningen (handlingen) som korresponderer til høyest Q-verdi i angitt posisjon (tilstand). Med andre ord, funksjonen skal returnere $\pi_*(s)=\arg\max_{a\in\mathcal{A}}Q(s,a)$ hvor $s$ er `agent_pos`.
 
 <details>
   <summary><b>&#128161; Hint</b></summary>
