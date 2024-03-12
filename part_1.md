@@ -167,50 +167,7 @@ def get_random_position(maze):
 
 ---
 
-### 1.d Flytt agenten
-
-Lag en funksjon `move_agent(agent_pos, direction)` i filen `maze.py` som returnerer agentens nye posisjon dersom agenten er i `agent_pos` og beveger seg i retning `direction`. Parameteren `agent_pos` er igjen en tupel med heltall på formen `(x, y)`. Parameteren `direction` er en streng som har en av følgende verdier: `"left"`, `"right"`, `"up"` eller `"down"`.
-
-**Merk:** Du trenger *ikke* å tenke på om agenten går inn i en vegg eller ender opp i en målrute på dette tidspunktet. Vi tar hånd om det senere siden vi vil la agenten ha muligheten til å krasje i vegger da dette er noe den skal lære seg å ikke gjøre.
-
-<details>
-  <summary><b>&#128161; Hint</b></summary>
-
-Du kan bruke "early return" for å gjøre koden din lettere å lese. For eksempel funksjonen `foo(bar)` nedenfor returnerer 1 hvis bar har verdien "hello", 2 hvis bar har verdien "world" og 0 ellers.
-
-```python
-def foo(bar):
-    if bar == "hello":
-        return 1
-    if bar == "world":
-        return 2
-    return 0
-```
-
-</details>
-
-<details>
-  <summary><b>&#129528; Løsningsforslag</b></summary>
-
-```python
-def move_agent(agent_pos, direction):
-    x, y = agent_pos
-    if direction == "left":
-        return (x - 1, y)
-    if direction == "right":
-        return (x + 1, y)
-    if direction == "up":
-        return (x, y - 1)
-    if direction == "down":
-        return (x, y + 1)
-    return agent_pos
-```
- 
-</details>
-
----
-
-### 1.e Sjekk rutetype
+### 1.d Sjekk rutetype
 
 I filen `maze.py`, lag to funksjoner `is_wall(maze, pos)` og `is_goal(maze, pos)` som henholdsvis sjekker om ruten i posisjon `pos` er en veggrute eller målrute. Parameteren `maze` er labyrinten gitt som en 2D-liste og parameteren `pos` er en tupel av heltall `(x, y)` som angir ruten vi vil sjekke. Funksjonen `is_wall(maze, pos)` skal returnere `True` hvis ruten i posisjon `pos` er en veggrute (har verdi `1`), og `False` ellers. Funksjonen `is_goal(maze, pos)` skal returnere `True` hvis ruten i posisjon `pos` er en målrute (har verdi `2`), og `False` ellers.
 
@@ -220,6 +177,8 @@ I filen `maze.py`, lag to funksjoner `is_wall(maze, pos)` og `is_goal(maze, pos)
   - Pakk ut tupelen `pos` som `x, y = pos` og sjekk verdien av `maze[y][x]`.
 
 </details>
+
+&#128203; **Test implementasjonen din:** Lagre filen [`test_is_wall_and_is_goal.py`](./tests/test_is_wall_and_is_goal.py) i samme mappe som de andre filene og kjør den for å teste koden din. Hvis du får `All test passed!` kan du gå videre.
 
 <details>
   <summary><b>&#129528; Løsningsforslag</b></summary>
@@ -234,6 +193,88 @@ def is_goal(maze, pos):
     return maze[y][x] == 2
 ```
   
+</details>
+
+---
+
+### 1.e Finn koordinater til naborute
+
+Lag en funksjon `coord_in_direction(pos, direction)` i filen `maze.py`. Funksjonen tar in en tupel `pos` av heltall på formen `(x, y)` og en streng `direction` som tar en av følgende verdier: `"left"`, `"right"`, `"up"` eller `"down"`. Funksjonen skal returnere en posisjonen til ruten i retning `direction`.
+
+For eksempel, `coord_in_direction((1, 1), "up")` skal returnere `(1, 0)` og `coord_in_direction((1, 1), "left")` skal returnere `(0, 1)`.
+
+Du skal ikke sjekke om den nye posisjonen er en veggrute eller utenfor brettet.
+
+<details>
+  <summary><b>&#128161; Hint</b></summary>
+
+  - Pakk ut tupelen `pos` som `x, y = pos`.
+  - Koordinatene for ruten til venstre blir `(x - 1, y)`.
+  - Koordinatene for ruten til høyre blir `(x + 1, y)`.
+  - Koordinatene for ruten over blir `(x, y - 1)`.
+  - Koordinatene for ruten under blir `(x, y + 1)`.
+
+</details>
+
+&#128203; **Test implementasjonen din:** Lagre filen [`test_coord_in_direction.py`](./tests/test_coord_in_direction.py) i samme mappe som de andre filene og kjør den for å teste koden din. Hvis du får `All test passed!` kan du gå videre.
+
+<details>
+  <summary><b>&#129528; Løsningsforslag</b></summary>
+
+```python
+def coord_in_direction(pos, direction):
+    x, y = pos
+    if direction == "left":
+        return (x - 1, y)
+    if direction == "right":
+        return (x + 1, y)
+    if direction == "up":
+        return (x, y - 1)
+    if direction == "down":
+        return (x, y + 1)
+    return pos
+```
+  
+</details> 
+
+---
+
+### 1.f Flytt agenten
+
+Lag en funksjon `move_agent(agent_pos, direction, maze)` i filen `maze.py` som returnerer agentens nye posisjon dersom agenten er i `agent_pos` og beveger seg i retning `direction`. Parameteren `agent_pos` er igjen en tupel med heltall på formen `(x, y)`. Parameteren `direction` er en streng som har en av følgende verdier: `"left"`, `"right"`, `"up"` eller `"down"`. Parameteren `maze` er en 2D-liste som representerer labyrinten. Hvis agenten prøver å gå inn i en vegg, returner `agent_pos`. Ellers, returner koordinatene til den nye posisjonen.
+
+
+<details>
+  <summary><b>&#128161; Hint</b></summary>
+
+  - Bruk `coord_in_direction` for å finne koordinatene til ruten i retning `direction` fra `agent_pos`.
+  - Bruk `is_wall` for å sjekke om naboruten er en vegg.
+  - Du kan bruke "early return" for å gjøre koden din lettere å lese. For eksempel funksjonen `foo(bar)` nedenfor returnerer 1 hvis bar har verdien "hello", 2 hvis bar har verdien "world" og 0 ellers.
+
+```python
+def foo(bar):
+    if bar == "hello":
+        return 1
+    if bar == "world":
+        return 2
+    return 0
+```
+
+</details>
+
+&#128203; **Test implementasjonen din:** Lagre filen [`test_move_agent.py`](./tests/test_move_agent.py) i samme mappe som de andre filene og kjør den for å teste koden din. Hvis du får `All test passed!` kan du gå videre.
+
+<details>
+  <summary><b>&#129528; Løsningsforslag</b></summary>
+
+```python
+def move_agent(agent_pos, direction, maze):
+    next_pos = coord_in_direction(agent_pos, direction)
+    if is_wall(maze, next_pos):
+        return agent_pos
+    return next_pos
+```
+ 
 </details>
 
 ---

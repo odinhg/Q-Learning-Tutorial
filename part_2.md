@@ -28,7 +28,7 @@ def timer_fired(app):
 def key_pressed(app, event):
     if event.key in ["Left", "Right", "Up", "Down"]:
         direction = event.key.lower()
-        app.agent_pos = move_agent(app.agent_pos, direction)
+        app.agent_pos = move_agent(app.agent_pos, direction, maze)
     if event.key == "Space":
         app.is_paused = not app.is_paused
     if event.key == "r":
@@ -53,7 +53,7 @@ run_app(width=WIDTH, height=HEIGHT, title="Q-Learning Maze")
 
 **Forklaring av koden ovenfor:** Variablene `WIDTH` og `HEIGHT` angir størrelsen på vinduet. I funksjonen `app_started` definerer vi noen variabler som vi trenger. Vi lagrer labyrinten i `app.maze` og startposisjonen til agenten i `app.agent_pos`. Variabelen `app.timer_delay` angir hvor ofte funksjonen `timer_fired` kalles når programmet kjører (i millisekund). Den boolske variabelen `app.is_paused` angir om programmet er satt på pause eller ikke. De to variablene `app.upper_left` og `app.bottom_right` angir koordinatene til øvre venstre hjørne og nedre høyre hjørne til labyrinten og brukes når vi kaller `draw_maze` i `redraw_all`. I funksjonen `timer_fired` skjer det ikke så mye enda, men her skal læring og oppdatering av agenten skje senere. I funksjonen `key_pressed` definerer vi noen hurtigtaster som vi kan bruke når programmet kjører: Vi kan endre agentents posisjon med piltastene. Vi kan trykke `space` for å pause/fortsette kjøring av programmet. Vi kan justere hastigheten med `f` (raskere) og `s` (saktere). Vi kan flytte agenten til en tilfeldig plass ved å trykke `r`. I funksjonen `redraw_all` tegner vi labyrinten ved hjelp av `draw_maze`.
 
-Når du kjører `main.py` skal du nå få opp et vindu med labyrinten og du skal kunne flytte agenten rundt med piltastene (også igjennom vegger).
+Når du kjører `main.py` skal du nå få opp et vindu med labyrinten og du skal kunne flytte agenten rundt med piltastene.
 
 ![Eksempel på hvordan det ser ut når du kjører startkoden.](./img/part_2_starter_code_preview.png)
 
@@ -141,13 +141,13 @@ Lag en funksjon `reward_function(agent_pos, direction, maze)` i filen `learning.
 2. `direction`: en streng som kan ta verdiene `"left"`, `"right"`, `"up"` eller `"down"` som sier hvilken posisjon vi skal gå, og
 3. `maze`: en 2D-liste som representerer labyrinten.
 
-Hvis agenten går fra `agent_pos` til en åpen rute skal funksjonen returnere `-0.5`. Hvis agenten går til en veggrute skal funksjonen returnere `-1.0`, og hvis agenten går til en målrute skal funksjonen returnere `1.0`.
+Hvis naboruten til `agent_pos` i retning `direction` er en åpen rute skal funksjonen returnere `-0.1`. Hvis naboruten er en veggrute skal funksjonen returnere `-1.0`, og hvis naboruten er en målrute skal funksjonen returnere `1.0`.
 
 <details>
   <summary><b>&#128161; Hint</b></summary>
 
-- Bruk funksjonen `move_agent` fra filen `maze.py` for å finne agentens nye posisjon etter å ha gått i retning `direction`.
-- Returner belønningsverdi basert på verdien av `maze` for den nye posisjonen. Her kan du bruke `is_wall` og `is_goal` fra `maze.py`. 
+- Bruk funksjonen `coord_in_direction` fra filen `maze.py` for å finne koordinatene i retning `direction` fra `agent_pos`.
+- Returner belønningsverdi basert på verdien av `maze` for den nye posisjonen. Bruk gjerne funksjonene `is_wall` og `is_goal` fra `maze.py` for å avgjøre hva belønningen skal være. 
 
 </details>
 
@@ -227,15 +227,12 @@ I funksjonen `app_started` i filen `main.py` lag en ny variabel `app.epsilon` me
 I slutten av funksjonen `timer_fired` i filen `main.py`, implementer følgende:
 
 1. Lag en variabel `direction` med returverdien du får ved å kalle `decide_direction` (fra `learning.py`) med parametrene `app.agent_pos`, `app.q_table` og `app.epsilon`.
-2. Lag en variabel `next_position` med posisjonen til agenten hvis agenten går i retning `direction`. 
-3. Hvis `next_position` *ikke* er en veggrute, flytt agenten til `next_position`.
+2. Hvis ruten i retning `direction` fra `app.agent_pos` *ikke* er en veggrute, flytt agenten dit.
 
 <details>
   <summary><b>&#128161; Hint</b></summary>
 
-- Bruk funksjonen `move_agent` fra `maze.py` for å finne `next_position`.
-- Bruk funksjonen `is_wall` for å sjekke at `next_position` ikke peker på en veggrute.
-- Oppdater `app.agent_pos` til `next_position` for å flytte agenten.
+Oppdater `app.agent_pos` ved å bruke funksjonen `move_agent` fra `maze.py`. 
 
 </details>
 
@@ -283,7 +280,7 @@ La oss prøve å forstå litt bedre hva denne regelen egentlig gjør:
 
 **2.d.1) Finn $\max_{a\in\mathcal{A}}Q(s_{t+1}, a)$** 
 
-Lag en funksjon `get_optimal_future_q_value(q_table, agent_pos, direction)` i `learning.py`. Denne funksjonen skal returnere verdien av $\max_{a\in\mathcal{A}} Q(s_{t+1}, a)$. Funksjonen tar inn tre parametere: et oppslagsverk `q_table` som representerer en Q-tabell, en tupel av heltall `agent_pos` som angir agentens posisjon (altså $s_t$) og en streng `direction` som angir hvilken retning agenten går i (altså $a_t$).
+Lag en funksjon `get_optimal_future_q_value(q_table, agent_pos, direction, maze)` i `learning.py`. Denne funksjonen skal returnere verdien av $\max_{a\in\mathcal{A}} Q(s_{t+1}, a)$. Funksjonen tar inn fire parametere: et oppslagsverk `q_table` som representerer en Q-tabell, en tupel av heltall `agent_pos` som angir agentens posisjon (altså $s_t$), en streng `direction` som angir hvilken retning agenten går i (altså $a_t$), og selve labyrinten `maze` som en 2D-liste av heltall.
 
 <details>
   <summary><b>&#128161; Hint</b></summary>
@@ -305,7 +302,7 @@ Vi skal nå lage varialer for læringsraten $\alpha$ og rabattfaktoren $\gamma$.
 
 **2.d.3) Oppdater Q-verdi**
 
-Vi skal nå oppdatere Q-verdien når agenten går et steg. I funksjonen `timer_fired` i `main.py` rett under linjen `direction = decide_direction(...)`, oppdater Q-tabellen ved å bruke regelen under.
+Vi skal nå oppdatere Q-verdien når agenten går et steg. I funksjonen `timer_fired` i `main.py` rett under linjen `direction = decide_direction(...)` (og før linjen der du oppdaterer `app.agent_pos`), oppdater Q-tabellen ved å bruke regelen under.
 
 $$
 Q(s_t, a_t)\leftarrow(1-\alpha)Q(s_t, a_t)+\alpha\left(R(s_t, a_t)+\gamma\max_{a\in\mathcal{A}} Q(s_{t+1}, a)\right)
