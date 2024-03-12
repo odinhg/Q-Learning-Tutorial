@@ -133,7 +133,7 @@
 	\pause
 	
 	Mulige tilstander (agentens posisjon):
-	$$\mathcal{S} =\lbrace (0,0), (1,0), (2,0), (0,1), (1,1), (2,1), (0,2), (1,2), (2,2)\rbrace$$
+	$$\mathcal{S} =\lbrace (0,0), (1,0), (2,0), \textcolor{gray}{(0,1)}, (1,1), \textcolor{gray}{(2,1)}, (0,2), (1,2), \textcolor{gray}{(2,2)}\rbrace$$
 	
 	\pause
 	
@@ -142,7 +142,7 @@
 \end{frame}
 
 \begin{frame}{Eksempel: Belønningsfunksjonen}
-	La $s'$ være posisjonen vi treffer ved å gå i retning $a$ fra posisjon $s$.
+	La $s'$ være ruten i retning $a$ fra posisjon $s$.
 	
 	\vspace{1em}
 	
@@ -379,9 +379,9 @@
 		\end{column}
 	\end{columns}		
 	$$
-	Q(s_t, a_t)\leftarrow\underbracket{(1-\alpha)}_{0.2}\underbracket{Q(s_t, a_t)}_{-0.6}+\underbracket{\alpha}_{0.8}\left(\underbracket{R(s_t, a_t)}_{-1.0}+\underbracket{\gamma}_{0.5}\underbracket{\max_{a\in\mathcal{A}} Q(\overbracket{s_{t+1}}^{(0,1)}, a)}_{0.0}\right).
+	Q(s_t, a_t)\leftarrow\underbracket{(1-\alpha)}_{0.2}\underbracket{Q(s_t, a_t)}_{-0.6}+\underbracket{\alpha}_{0.8}\left(\underbracket{R(s_t, a_t)}_{-1.0}+\underbracket{\gamma}_{0.5}\underbracket{\max_{a\in\mathcal{A}} Q(\overbracket{s_{t+1}}^{(1,1)}, a)}_{0.9}\right).
 	$$
-	Ny Q-verdi: $Q((1,1), \text{venstre})=\textbf{-0.92}$
+	Ny Q-verdi: $Q((1,1), \text{venstre})=\textbf{-0.56}$
 \end{frame}
 
 \begin{frame}{Eksempel: Læringsteg 3}
@@ -402,7 +402,7 @@
 					\diagbox{$\textbf{s}$}{$\textbf{a}$} & $\textbf{venstre}$ & $\textbf{høyre}$ & $\textbf{opp}$ & $\textbf{ned}$\\ \hline
 					\multicolumn{5}{|c|}{\vdots} \\ \hline
 					$(1,0)$ & 0.1 & 1.0 & -0.8 & 0.2 \\ \hline
-					\rowcolor{orange!35}$(1,1)$ & \textit{-0.92} & -0.8 & \cellcolor{orange!70}0.9 & 0.2 \\ \hline
+					\rowcolor{orange!35}$(1,1)$ & \textit{-0.56} & -0.8 & \cellcolor{orange!70}0.9 & 0.2 \\ \hline
 					$(1,2)$ & -0.4 & -1.0 & \textit{0.34} & -0.9 \\ \hline
 					\multicolumn{5}{|c|}{\vdots}\\ \hline
 				\end{tabular}
@@ -433,7 +433,7 @@
 					\diagbox{$\textbf{s}$}{$\textbf{a}$} & $\textbf{venstre}$ & $\textbf{høyre}$ & $\textbf{opp}$ & $\textbf{ned}$\\ \hline
 					\multicolumn{5}{|c|}{\vdots} \\ \hline
 					\rowcolor{orange!35}$(1,0)$ & 0.1 & \cellcolor{orange!70}1.0 & -0.8 & 0.2 \\ \hline
-					$(1,1)$ & \textit{-0.92} & -0.8 & \textit{0.5} & 0.2 \\ \hline
+					$(1,1)$ & \textit{-0.56} & -0.8 & \textit{0.5} & 0.2 \\ \hline
 					$(1,2)$ & -0.4 & -1.0 & \textit{0.34} & -0.9 \\ \hline
 					\multicolumn{5}{|c|}{\vdots}\\ \hline
 				\end{tabular}
