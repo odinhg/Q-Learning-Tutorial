@@ -130,15 +130,20 @@
 	
 	\vspace{1em}
 	
-	\pause
+	\only<2>{
+	\textbf{Læringsmål for agenten:} Fra en vilkårlig åpen rute, nå mål ved å bruke så få steg som mulig.
+	}
 	
+	
+	\only<3->{
 	Mulige tilstander (agentens posisjon):
 	$$\mathcal{S} =\lbrace (0,0), (1,0), (2,0), \textcolor{gray}{(0,1)}, (1,1), \textcolor{gray}{(2,1)}, (0,2), (1,2), \textcolor{gray}{(2,2)}\rbrace$$
+	}
 	
-	\pause
-	
+	\only<4->{
 	Mulige handlinger (retninger å gå):
 	$$\mathcal{A} = \{\text{venstre}, \text{høyre}, \text{opp}, \text{ned}\}$$
+	}
 \end{frame}
 
 \begin{frame}{Eksempel: Belønningsfunksjonen}
@@ -174,7 +179,7 @@
 \end{frame}
 
 \begin{frame}{Q-tabell}
-	Hvis vi har endelig mange tilstander og handlinger, kan vi representere Q-funksjonen som en tabell (\textbf{Q-tabell}):
+	Hvis vi har endelig mange tilstander og handlinger, kan vi representere Q-funksjonen $Q\colon\mathcal{S}\times\mathcal{A}\to\mathbb{R}$ som en tabell (\textbf{Q-tabell}):
 	\begin{columns}
 	\begin{column}{0.5\textwidth}
 	\begin{table}[!hbt]
@@ -273,11 +278,11 @@
 	\textbf{Q-læringsalgoritmen (én episode):}
 	
 	\begin{enumerate}
-		\item Agenten er i posisjon $s_t$ ved tid $t$. Velg en handling $a_t$. Ved å utføre $a_t$ i $s_t$ treffer vi $s_{t+1}$.
+		\item Vi er i tilstanden $s_t$ ved tid $t$. Velg en handling $a_t$. Ved å utføre $a_t$ i tilstand $s_t$ ender vi opp i tilstand $s_{t+1}$.
 		
 		\pause
 		
-		\item Vi oppdaterer $Q(s_t,a_t)$ med følgende regel:
+		\item Vi oppdaterer Q-verdien $Q(s_t,a_t)$ med følgende regel:
 		$$
 		Q(s_t, a_t)\leftarrow(1-\alpha)Q(s_t, a_t)+\alpha\left(R(s_t, a_t)+\gamma\max_{a\in\mathcal{A}} Q(s_{t+1}, a)\right).
 		$$
@@ -295,10 +300,10 @@
 	$$
 	\begin{itemize}
 		\setlength\itemsep{2em}
-		\item Gammel og ny kunnskap kombineres ($\alpha$ bestemmer balansen mellom de).
+		\item Gammel og ny erfaring kombineres ($\alpha$ bestemmer balansen).
 		\item Belønningen for å utføre $a_t$ i tilstand $s_t$ påvirker den nye Q-verdien.
 		\item Hvor mye vi bryr oss om fremtiden bestemmes av $\gamma$.
-		%\item Summanden $\gamma\max_{a\in\mathcal{A}} Q(s_{t+1}, a)$ tillater flyt av informasjon mellom forskjellige tilstander.
+		%\item Summanden $\gamma\max_{a\in\mathcal{A}} Q(s_{t+1}, a)$ tillater mellomflyt av informasjon mellom forskjellige tilstander.
 	\end{itemize}
 \end{frame}
 
