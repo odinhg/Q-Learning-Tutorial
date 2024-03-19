@@ -25,7 +25,7 @@ Filen `main.py` vil inneholde selve programmet, `learning.py` vil inneholde funk
 
 ---
 
-Tutorialen er delt opp i to deler. I den første delen skal vi lage funksjoner som har med labyrinten å gjøre. I den andre delen skal vi gjøre selve implementasjonen av Q-læringsalgoritmen. I den første delen er det løsningsforslag til hver av deloppgavene(selv om det beste er om du prøver å løse alle oppgavene selv).
+Tutorialen er delt opp i to deler. I den første delen skal vi lage funksjoner som har med labyrinten å gjøre. I den andre delen skal vi gjøre selve implementasjonen av Q-læringsalgoritmen. I den første delen er det løsningsforslag til hver av deloppgavene (selv om det beste er om du prøver å løse alle oppgavene selv).
 
 [Trykk her for å komme til del 1.](./part_1.md)
 

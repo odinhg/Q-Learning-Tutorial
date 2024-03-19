@@ -24,6 +24,6 @@ assert (3, 3) == move_agent(agent_pos, direction, maze)
 direction = "down"
 assert (3, 3) == move_agent(agent_pos, direction, maze)
 direction = "right"
-assert (3, 4) == move_agent(agent_pos, direction, maze)
+assert (4, 3) == move_agent(agent_pos, direction, maze)
 
 print("All test passed!")

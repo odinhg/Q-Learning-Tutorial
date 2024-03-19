@@ -28,7 +28,7 @@ def timer_fired(app):
 def key_pressed(app, event):
     if event.key in ["Left", "Right", "Up", "Down"]:
         direction = event.key.lower()
-        app.agent_pos = move_agent(app.agent_pos, direction, maze)
+        app.agent_pos = move_agent(app.agent_pos, direction, app.maze)
     if event.key == "Space":
         app.is_paused = not app.is_paused
     if event.key == "r":
