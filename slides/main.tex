@@ -135,14 +135,35 @@
 	}
 	
 	
-	\only<3->{
+	\only<3-4>{
 	Mulige tilstander (agentens posisjon):
 	$$\mathcal{S} =\lbrace (0,0), (1,0), (2,0), \textcolor{gray}{(0,1)}, (1,1), \textcolor{gray}{(2,1)}, (0,2), (1,2), \textcolor{gray}{(2,2)}\rbrace$$
 	}
 	
-	\only<4->{
+	\only<4>{
 	Mulige handlinger (retninger å gå):
 	$$\mathcal{A} = \{\text{venstre}, \text{høyre}, \text{opp}, \text{ned}\}$$
+	}
+	
+	\only<5>{
+	Noen eksempler på par $(s,a)\in\mathcal{S}\times\mathcal{A}$:
+	\vspace{-1em}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+			\item $((1,2), \text{opp})$
+			\item $((1,2), \text{høyre})$
+			\item $((0,0), \text{ned})$
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}%%<--- here
+			\begin{itemize}
+				\item $((1,1), \text{venstre})$
+				\item $((0,2), \text{opp})$
+				\item $((1,1), \text{ned})$
+			\end{itemize}
+		\end{column}
+	\end{columns}
 	}
 \end{frame}
 
