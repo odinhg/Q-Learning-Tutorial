@@ -1,6 +1,6 @@
 # Tutorial: Løs labyrint med Q-læring
 
-Dette er en tutorial lagd for studenter som tar INF100 (Innføring i programmering) våren 2024 og ønsker en ekstra utfordring. Målet vårt er å lage et program der hvor en agent lærer seg å løse en labyrint ved hjelp av Q-læring, en form for forsterkende læring (reinforcement learning).
+Dette er en tutorial lagd for studenter som tar INF100 (Innføring i programmering) våren 2024. Målet vårt er å lage et program der hvor en agent lærer seg å løse en labyrint ved hjelp av Q-læring, en form for forsterkende læring (reinforcement learning).
 
 &#128210; [Trykk her for å gå til slides.](./slides/main.pdf)
 
@@ -54,12 +54,6 @@ Her er en liste over forslag til mulige forbedringer og eksperimenter du kan vel
 **Eksempel/inspirasjon:**
 
 ![Animert eksempel som viser en forbedret versjon.](./img/improved_example_animated.gif)
-
----
-
-## Løsningsforslag
-
-Løsningsforslag kommer her etter innleveringsfristen.
 
 ---
 

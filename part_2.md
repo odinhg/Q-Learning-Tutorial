@@ -1,64 +1,3 @@
-## Forberedelser til del 2
-
-For å komme litt raskere igang, kopier koden under inn i filen `main.py`.
-
-```python
-from uib_inf100_graphics.event_app import run_app
-from maze import *
-from learning import *
-
-WIDTH = 800
-HEIGHT = 800
-
-def app_started(app):
-    app.maze = load_maze_from_file("maze.txt")
-    app.agent_pos = get_random_position(app.maze)
-
-    app.timer_delay = 1
-    app.is_paused = False
-    app.upper_left = (20, 50)
-    app.bottom_right = (WIDTH - 20, HEIGHT - 20)
-
-
-def timer_fired(app):
-    if app.is_paused:
-        return
-
-
-def key_pressed(app, event):
-    if event.key in ["Left", "Right", "Up", "Down"]:
-        direction = event.key.lower()
-        app.agent_pos = move_agent(app.agent_pos, direction, app.maze)
-    if event.key == "Space":
-        app.is_paused = not app.is_paused
-    if event.key == "r":
-        app.agent_pos = get_random_position(app.maze)
-    if event.key == "f" and app.timer_delay > 1:
-        app.timer_delay -= 1
-    if event.key == "s" and app.timer_delay < 500:
-        app.timer_delay += 1
-
-
-def redraw_all(app, canvas):
-    draw_maze(
-        canvas,
-        app.maze,
-        *app.upper_left,
-        *app.bottom_right,
-        app.agent_pos,
-    )
-
-run_app(width=WIDTH, height=HEIGHT, title="Q-Learning Maze")
-```
-
-**Forklaring av koden ovenfor:** Variablene `WIDTH` og `HEIGHT` angir størrelsen på vinduet. I funksjonen `app_started` definerer vi noen variabler som vi trenger. Vi lagrer labyrinten i `app.maze` og startposisjonen til agenten i `app.agent_pos`. Variabelen `app.timer_delay` angir hvor ofte funksjonen `timer_fired` kalles når programmet kjører (i millisekund). Den boolske variabelen `app.is_paused` angir om programmet er satt på pause eller ikke. De to variablene `app.upper_left` og `app.bottom_right` angir koordinatene til øvre venstre hjørne og nedre høyre hjørne til labyrinten og brukes når vi kaller `draw_maze` i `redraw_all`. I funksjonen `timer_fired` skjer det ikke så mye enda, men her skal læring og oppdatering av agenten skje senere. I funksjonen `key_pressed` definerer vi noen hurtigtaster som vi kan bruke når programmet kjører: Vi kan endre agentents posisjon med piltastene. Vi kan trykke `space` for å pause/fortsette kjøring av programmet. Vi kan justere hastigheten med `f` (raskere) og `s` (saktere). Vi kan flytte agenten til en tilfeldig plass ved å trykke `r`. I funksjonen `redraw_all` tegner vi labyrinten ved hjelp av `draw_maze`.
-
-Når du kjører `main.py` skal du nå få opp et vindu med labyrinten og du skal kunne flytte agenten rundt med piltastene.
-
-![Eksempel på hvordan det ser ut når du kjører startkoden.](./img/part_2_starter_code_preview.png)
-
----
-
 ## Del 2: Q-læring
 
 Vi skal nå gjøre det mulig for agenten å lære gjennom å utforske labyrinten på egenhånd. Målet er å lære en policy som er optimal med tanke på målet vårt: Fra en gitt posisjon i labyrinten, finn den beste handlingen, altså retningen å gå i, for å nå målet raskest mulig.
@@ -79,7 +18,7 @@ $$
 
 Q-funksjonen er en funksjon $Q\colon \mathcal{S}\times\mathcal{A}\to\mathbb{R}$. Det vil si at for hvert par $(s, a)$ hvor $s$ er en tilstand og $a$ er en handling så gir Q-funksjonen én verdi $Q(s,a)$ til dette paret. Til å begynne med setter vi $Q(s,a)=0$ for alle par $(s,a)\in\mathcal{S}\times\mathcal{A}$. Gjennom læringsprosessen oppdateres Q-funksjonen hver gang agenten utfører en handling (akkurat hvordan dette gjøres kommer vi til snart). Vi kan derfor tenke oss at agentens erfaring lagres i Q-funksjonen.
 
-For å være litt mer konkret: La oss si at agenten er i posisjon $(x,y)$ i labyrinten slik at tilstanden $s=(x,y)$. Da har vi fire valg for $a$ i vårt tilfelle som gir oss fire verdier $Q(s, \text{venstre})$, $Q(s, \text{høyre})$, $Q(s, \text{opp})$ og $Q(s, \text{ned})$ (dette er bare fire tall). Over tid vil vi at det optimale valget for $a$ skal ha høyest verdi av disse fire verdiene. Det optimale valget for $a$ er den handlingen som gjør at vi kommer raskest til målruten.
+For å være litt mer konkret: La oss si at agenten er i posisjon $(c, r)$ i labyrinten slik at tilstanden $s=(c, r)$. Da har vi fire valg for $a$ i vårt tilfelle som gir oss fire verdier $Q(s, \text{venstre})$, $Q(s, \text{høyre})$, $Q(s, \text{opp})$ og $Q(s, \text{ned})$ (dette er bare fire tall). Over tid vil vi at det optimale valget for $a$ skal ha høyest verdi av disse fire verdiene. Det optimale valget for $a$ er den handlingen som gjør at vi kommer raskest til målruten.
 
 ### 2.a: Opprette Q-funksjonen 
 
@@ -103,7 +42,7 @@ I tabellen ovenfor har vi tilstanden (agentens posisjon) i kolonnen helt til ven
 
 Vi skal nå opprette en slik "tom" Q-tabell.
 
-**1)** Lag en funksjon `generate_q_table(n_row, n_col)` i filen `learning.py`. Parameterene `n_row` og `n_col` er henholdsvis antall rader og kolonner i labyrinten (begge heltall). Returner et oppslagsverk (dictionary) med nøkkelverdier `(x, y)` for alle mulige posisjoner i labyrinten (inkludert veggruter og målruter). For hver nøkkelverdi `(x, y)` skal vi ha verdien `{"left": 0.0, "right": 0.0, "up": 0.0, "down": 0.0}`. Vi har med andre ord laget et oppslagsverk av oppslagsverk for å lagre Q-tabellen.
+**1)** Lag en funksjon `generate_q_table(n_row, n_col)` i filen `learning.py`. Parameterene `n_row` og `n_col` er henholdsvis antall rader og kolonner i labyrinten (begge heltall). Returner et oppslagsverk (dictionary) med nøkkelverdier `(col, row)` for alle mulige posisjoner i labyrinten (inkludert veggruter og målruter). For hver nøkkelverdi `(col, row)` skal vi ha verdien `{"left": 0.0, "right": 0.0, "up": 0.0, "down": 0.0}`. Vi har med andre ord laget et oppslagsverk av oppslagsverk for å lagre Q-tabellen.
 
 Q-verdien som korresponderer til å gå til venstre når agenten er i posisjon $(1,2)$ kan vi nå få tak i via `q_table[(1,2)]["left"]`. For å få tak i Q-verdien for å gå ned når agenten er i posisjon $(1,0)$, leser vi verdien til `q_table[(1,0)]["down"]`, og så videre.
 
@@ -112,7 +51,7 @@ Q-verdien som korresponderer til å gå til venstre når agenten er i posisjon $
 <details>
   <summary><b>&#128161; Hint</b></summary>
 
-- For å iterere over alle par `(x, y)` hvor `0 <= x < n_col` og `0 <= y < n_row` kan du benytte to nøstede for-løkker...
+- For å iterere over alle par `(col, row)` hvor `0 <= col < n_col` og `0 <= row < n_row` kan du benytte to nøstede for-løkker...
 - ... eller du kan benytte `itertools.product` sammen med `range` (prøv å kjør eksempelet nedenfor).
 
 ```python
@@ -137,7 +76,7 @@ For enhver tilstand $s$ og enhver handling $a$ får vi et flyttall $R(s,a)$ som 
 
 Lag en funksjon `reward_function(agent_pos, direction, maze)` i filen `learning.py` som tar in følgende tre parametere:
 
-1. `agent_pos`: en tupel `(x, y)` som gir oss agentens posisjon i labyrinten,
+1. `agent_pos`: en tupel `(col, row)` som gir oss agentens posisjon i labyrinten,
 2. `direction`: en streng som kan ta verdiene `"left"`, `"right"`, `"up"` eller `"down"` som sier hvilken posisjon vi skal gå, og
 3. `maze`: en 2D-liste som representerer labyrinten.
 
@@ -157,7 +96,7 @@ Hvis naboruten til `agent_pos` i retning `direction` er en åpen rute skal funks
 
 ### 2.c: $\epsilon$-grådig Q-læring
 
-La $\epsilon$ være et tall mellom $0$ og $1$. Vi ønsker at agenten utfører en tilfeldig handling med sannsynlighet $\epsilon$ og at agenten utfører handlingen med størst Q-verdi med sannsynlighet $1-\epsilon$. Dette kalles $\epsilon$-grådig Q-læring.
+La $\epsilon$ være et tall mellom $0$ og $1$. Vi ønsker at agenten utfører en tilfeldig handling med sannsynlighet $\epsilon$ og at agenten utfører handlingen med høyest Q-verdi med sannsynlighet $1-\epsilon$. Dette kalles $\epsilon$-grådig Q-læring.
 
 På denne måten lar vi agenten utforske tilfeldige retninger slik at den kan lære mer. Samtidig lar vi agenten også bruke tidligere erfaring noen ganger. Senere skal vi la $\epsilon$ bli gradvis mindre under treningen slik at agenten i større og større grad velger retning basert på Q-tabellen.
 
